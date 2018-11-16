@@ -2,6 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import APIRequest from '../services/request';
 import Weather from './weather';
+import UserWeather from './user-weather';
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -28,18 +29,27 @@ export default class Home extends React.Component {
 				week: []
 			},
 			savedCities: [],
-			userCity: '',
-			userCountry: ''
+			user: {
+				city: '',
+				country: ''
+			}
 		}
 	}
 
 	componentDidMount() {
 		navigator.geolocation.getCurrentPosition(function(position) {
 		  	new APIRequest().reverseLookup().then(res => {
-				console.log(this)
-		  		this.setState({ 
-		  			userCity: res.results[0].components.city,
-		  			userCountry: res.results[0].components.country 
+
+		  		let copyState = this.state.user;
+				copyState = {
+		  			city: res.results[0].components.city,
+		  			country: res.results[0].components.country 					
+				}
+
+		  		this.setState({ user: copyState }, ()=> {
+					new APIRequest().request(`${this.state.user.city}, ${this.state.user.country}`).then(res=>{
+						this.updateLocation(res);
+					});		  			
 		  		});
 		  	});
 		}.bind(this));	
@@ -47,6 +57,36 @@ export default class Home extends React.Component {
 
 	handleChange = (e) => {
 		this.setState({ search: e.target.value });
+	}
+
+	updateLocation(res, action) {
+		let data = res[0];
+
+		this.setState({ 
+			search: '',
+			location: {
+				city: data.name,
+				country: data.sys.country,					
+				date: data.dt,
+				cityId: data.id,
+				coord: data.coord,
+				main: {
+					temp: data.main.temp,
+					tempMax: data.main.temp_max,
+					tempMin: data.main.temp_min
+				},
+				weather: {
+					main: data.weather[0].main,
+					desc: data.weather[0].description
+				},
+				week: res[1].list
+			}
+		}, ()=> {
+			if(action === 'SUBMIT') {
+				this.props.history.push(`/weather`);
+			}
+			console.log(this.state.location)
+		});
 	}
 
 	saveCity(city, action) {
@@ -67,31 +107,13 @@ export default class Home extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		new APIRequest().request(this.state.search).then(res=>{
-			let data = res[0];
-			this.setState({ 
-				search: '',
-				location: {
-					city: data.name,
-					country: data.sys.country,					
-					date: data.dt,
-					cityId: data.id,
-					coord: data.coord,
-					main: {
-						temp: data.main.temp,
-						tempMax: data.main.temp_max,
-						tempMin: data.main.temp_min
-					},
-					weather: {
-						main: data.weather[0].main,
-						desc: data.weather[0].description
-					},
-					week: res[1].list
-				}
-			}, ()=> this.props.history.push(`/weather`));
+			this.updateLocation(res, 'SUBMIT');
 		});
 	}
 
 	render() {
+		const userWeather = this.state.location.city !== '' ? <UserWeather {...this.state.location} /> : '';
+
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
@@ -101,7 +123,8 @@ export default class Home extends React.Component {
 					</label>
 					<input type="submit" value="Submit"/>
 				</form>
-				{this.state.userCity} {this.state.userCountry}
+				{this.state.user.city} {this.state.user.country}
+				{userWeather}
 				<Route exact={true} path="/weather" render={(props)=> <Weather {...props} {...this.state.location} saveCityState={this.state.savedCities} saveCity={this.saveCity} /> }/>
 			</div>
 		)
