@@ -6,6 +6,7 @@ import Weather from './weather';
 export default class Home extends React.Component {
 	constructor(props) {
 		super(props); 
+		this.saveCity = this.saveCity.bind(this);
 
 		this.state = {
 			search: '',
@@ -25,7 +26,8 @@ export default class Home extends React.Component {
 					desc: ''
 				},
 				week: []
-			}
+			},
+			savedCities: []
 		}
 	}
 
@@ -33,11 +35,25 @@ export default class Home extends React.Component {
 		this.setState({ search: e.target.value });
 	}
 
+	saveCity(city, action) {
+		let savedCitiesCopy = this.state.savedCities;
+		if(action === 'ADD') {
+			let cityFound = this.state.savedCities.find(item=>item===city)
+			if(!cityFound){
+				savedCitiesCopy.push(city);
+			}
+		} else {
+			savedCitiesCopy = savedCitiesCopy.filter(item => item !== city);
+		}
+		this.setState({ savedCities: savedCitiesCopy }, ()=> {
+			localStorage.setItem("savedCities", JSON.stringify(this.state.savedCities));
+		});
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		new APIRequest().request(this.state.search).then(res=>{
 			let data = res[0];
-
 			this.setState({ 
 				search: '',
 				location: {
@@ -71,7 +87,7 @@ export default class Home extends React.Component {
 					</label>
 					<input type="submit" value="Submit"/>
 				</form>
-				<Route exact={true} path="/weather" render={(props)=> <Weather {...props} /> }/>
+				<Route exact={true} path="/weather" render={(props)=> <Weather {...props} {...this.state.location} saveCityState={this.state.savedCities} saveCity={this.saveCity} /> }/>
 			</div>
 		)
 	}

@@ -6,6 +6,7 @@ import NoMatch from './components/404';
 import './App.scss';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
