@@ -1,5 +1,7 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import APIRequest from '../services/request';
+import Weather from './weather';
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -34,7 +36,6 @@ export default class Home extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		new APIRequest().request(this.state.search).then(res=>{
-			console.log(res)
 			let data = res[0];
 
 			this.setState({ 
@@ -56,8 +57,7 @@ export default class Home extends React.Component {
 					},
 					week: res[1].list
 				}
-			}, ()=> this.props.history.push(`/weather?location=${this.state.location.city}, ${this.state.location.country}`));
-			console.log(this.state.location);
+			}, ()=> this.props.history.push(`/weather`));
 		});
 	}
 
@@ -71,6 +71,7 @@ export default class Home extends React.Component {
 					</label>
 					<input type="submit" value="Submit"/>
 				</form>
+				<Route exact={true} path="/weather" render={(props)=> <Weather {...props} /> }/>
 			</div>
 		)
 	}
