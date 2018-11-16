@@ -27,8 +27,22 @@ export default class Home extends React.Component {
 				},
 				week: []
 			},
-			savedCities: []
+			savedCities: [],
+			userCity: '',
+			userCountry: ''
 		}
+	}
+
+	componentDidMount() {
+		navigator.geolocation.getCurrentPosition(function(position) {
+		  	new APIRequest().reverseLookup().then(res => {
+				console.log(this)
+		  		this.setState({ 
+		  			userCity: res.results[0].components.city,
+		  			userCountry: res.results[0].components.country 
+		  		});
+		  	});
+		}.bind(this));	
 	}
 
 	handleChange = (e) => {
@@ -87,6 +101,7 @@ export default class Home extends React.Component {
 					</label>
 					<input type="submit" value="Submit"/>
 				</form>
+				{this.state.userCity} {this.state.userCountry}
 				<Route exact={true} path="/weather" render={(props)=> <Weather {...props} {...this.state.location} saveCityState={this.state.savedCities} saveCity={this.saveCity} /> }/>
 			</div>
 		)

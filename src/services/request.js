@@ -12,6 +12,14 @@ class APIRequest {
 		  });
 	}
 
+	reverseLookup() {
+		return fetch("https://api.opencagedata.com/geocode/v1/json?q=43.6772864+-79.2788992&key=1cf4f4a9be7544b78ad327e028757a33").then(function(response){
+			return response.json();
+		}).then(function(myJson){
+			return myJson;
+		})
+	}
+
 	request(location) {
 		return Promise.all([this.getDailyWeather(location, 'weather'), this.getDailyWeather(location, 'forecast')]);
 	}
