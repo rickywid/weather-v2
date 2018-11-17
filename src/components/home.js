@@ -1,169 +1,57 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import APIRequest from '../services/request';
-import Weather from './weather';
-import QuickCity from './quick-city';
-import UserWeather from './user-weather';
+import QuickCity from './/quick-city';
+import Slider from "react-slick";
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+
 
 export default class Home extends React.Component {
-	constructor(props) {
-		super(props); 
-		this.saveCity = this.saveCity.bind(this);
 
-		this.state = {
-			search: '',
-			location: {
-				city: '',
-				country: '',
-				date: null,
-				cityId: null,								
-				coord: {},
-				main: {
-					temp: null,
-					tempMax: null,
-					tempMin: null
-				},
-				weather: {
-					mainDesc: '',
-					desc: ''
-				},
-				week: []
-			},
-			savedCities: [],
-			user: {
-				city: '',
-				country: ''
-			},
-			myCities: []
+    displayMyCities() {
+    	console.log('displayMyCities')
+        return this.props.myCities.map(city => {
+            return <QuickCity name={city.name} temp={city.main.temp} weatherType={city.weather[0].main} weatherDesc={city.weather[0].description}/>
+        })
+    }
+    handleClick(ACTION) {
+    	this.props.saveCity(this.props.location.city, ACTION);
+    }
+	displaySaveBtnCity() {
+		let storage=JSON.parse(localStorage.getItem("savedCities"));
+		let match = storage.find(city=>city===this.props.location.city);
+
+		if(match){
+			return <Button variant="contained" color="primary" onClick={this.handleClick.bind(this, 'REMOVE')} className="btn-submit">Remove</Button>
 		}
+			return <Button variant="contained" color="primary" onClick={this.handleClick.bind(this,'ADD')} className="btn-submit">Save</Button>
+
 	}
-
-	componentDidMount() {
-
-		this.setState({
-			savedCities: JSON.parse(localStorage.getItem("savedCities"))
-		})
-
-
-		navigator.geolocation.getCurrentPosition(function(position) {
-		  	new APIRequest().reverseLookup().then(res => {
-
-		  		let copyState = this.state.user;
-				copyState = {
-		  			city: res.results[0].components.city,
-		  			country: res.results[0].components.country 					
-				}
-
-		  		this.setState({ user: copyState }, ()=> {
-					new APIRequest().request(`${this.state.user.city}, ${this.state.user.country}`).then(res=>{
-						this.updateLocation(res);
-					});		  			
-		  		});
-		  	});
-		}.bind(this));	
-
-		this.quickWeather();
-	}
-
-	handleChange = (e) => {
-		this.setState({ search: e.target.value });
-	}
-
-	updateLocation(res, action) {
-		let data = res[0];
-		console.log(data)
-		this.setState({ 
-			search: '',
-			location: {
-				city: data.name,
-				country: data.sys.country,					
-				date: data.dt,
-				cityId: data.id,
-				coord: data.coord,
-				main: {
-					temp: data.main.temp,
-					tempMax: data.main.temp_max,
-					tempMin: data.main.temp_min
-				},
-				weather: {
-					main: data.weather[0].main,
-					desc: data.weather[0].description
-				},
-				week: res[1].list
-			}
-		}, ()=> {
-			if(action === 'SUBMIT') {
-				this.props.history.push(`/weather`);
-			}
-		});
-	}
-
-	saveCity(city, action) {
-		let savedCitiesCopy = this.state.savedCities;
-		if(action === 'ADD') {
-			let cityFound = this.state.savedCities.find(item=>item===city)
-			if(!cityFound){
-				savedCitiesCopy.push(city);
-			}
-		} else {
-			savedCitiesCopy = savedCitiesCopy.filter(item => item !== city);
-		}
-		this.setState({ savedCities: savedCitiesCopy }, ()=> {
-			localStorage.setItem("savedCities", JSON.stringify(this.state.savedCities));
-			this.quickWeather();
-		});
-	}
-
-	handleSubmit = (e) => {
-		e.preventDefault();
-		new APIRequest().request(this.state.search).then(res=>{
-			this.updateLocation(res, 'SUBMIT');
-		});
-	}
-
-	quickWeather() {
-		
-		new APIRequest().requestCities(JSON.parse(localStorage.getItem("savedCities"))).then(res=>{
-			this.setState({ myCities: res });
-		});
-	}
-
-	displayMyCities() {
-		return this.state.myCities.map(city => {
-			console.log(city)
-			return <QuickCity name={city.name} temp={city.main.temp} weatherType={city.weather[0].main} weatherDesc={city.weather[0].description}/>
-		})
-	}
-
 	render() {
-		const userWeather = this.state.location.city !== '' ? <UserWeather {...this.state.location} {...this.state.user}  /> : '';
-		console.log('re-render')
+	    var settings = {
+	      dots: true,
+	      infinite: true,
+	      speed: 500,
+	      slidesToShow: 5,
+	      slidesToScroll: 1
+	    };
+
 		return (
 			<div className="body">
-				<form>
-					<TextField
-						id="standard-name"
-						label="Name"
-						value={this.state.search}
-						onChange={this.handleChange}
-						placeholder="toronto, canada"
-					/>	
-					<Button variant="contained" color="primary" onClick={this.handleSubmit}	className="btn-submit">Primary</Button>					
-				</form>
-				<div className="content">
-					{userWeather}
-					<aside>
-						{this.displayMyCities()}
-					</aside>				
+				
+				<h1>Quick Weather</h1>
+				<Slider {...settings}>
+					{this.displayMyCities()}
+				</Slider>
+
+				<div className="user-temp">
+					<h2>{this.props.location.city}, {this.props.location.country}</h2>
+					<p>temp {this.props.location.main.temp}</p>
+					<p>min {this.props.location.main.temp_min}</p>
+					<p>max {this.props.location.main.temp_max}</p>
+					<p>{this.props.location.weather.main}</p>
+					<p>{this.props.location.weather.desc}</p>
+					{this.displaySaveBtnCity()}
+                                     
 				</div>
-				<Route 	exact={true} 
-						path="/weather" 
-						render={(props)=> <Weather {...props} {...this.state.location} 
-											saveCityState={this.state.savedCities} 
-											saveCity={this.saveCity} /> }
-										/>									
 			</div>
 		)
 	}

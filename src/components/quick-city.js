@@ -13,6 +13,7 @@ export default class QuickCity extends React.Component {
 					<p>{this.props.temp}</p>
 					<p>{this.props.weatherType}</p>
 					<p>{this.props.weatherDesc}</p>
+			
 			</div>
 		)
 	}
