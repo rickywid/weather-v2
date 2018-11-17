@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import APIRequest from './services/request';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import NavBar from './components/navbar';
 import Home from './components/home';
 import Weather from './components/weather';
 import NoMatch from './components/404';
@@ -12,6 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props); 
     this.saveCity = this.saveCity.bind(this);
+    this.updateLocation = this.updateLocation.bind(this);
 
     this.state = {
         location: {
@@ -119,17 +121,11 @@ class App extends Component {
         });
     }
 
-    handleChange = (e) => {
-        this.setState({ search: e.target.value });
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        new APIRequest().request(this.state.search).then(res=>{
-            this.updateLocation(res);
-        });
-    }
     render() {
+
+        const navbarProps = {
+            updateLocation: this.updateLocation
+        }
 
         const homeProps = {
             location: this.state.location,
@@ -144,18 +140,8 @@ class App extends Component {
 
         return (
             <div className="App">
-                <nav>navbar</nav>
-                <div className="App-inner">
-                    <form>
-                        <TextField
-                            id="standard-name"
-                            label="Name"
-                            value={this.state.search}
-                            onChange={this.handleChange}
-                            placeholder="toronto, canada"
-                        />  
-                        <Button variant="contained" color="primary" onClick={this.handleSubmit.bind(this)} className="btn-submit">Search</Button>                 
-                    </form>                 
+                <NavBar {...navbarProps} />
+                <div className="App-inner">               
                     <BrowserRouter>
                         <Switch>
                             <Route exact={true} path="/" render={(props) => <Home 
