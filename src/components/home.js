@@ -2,7 +2,10 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import APIRequest from '../services/request';
 import Weather from './weather';
+import QuickCity from './quick-city';
 import UserWeather from './user-weather';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -32,11 +35,18 @@ export default class Home extends React.Component {
 			user: {
 				city: '',
 				country: ''
-			}
+			},
+			myCities: []
 		}
 	}
 
 	componentDidMount() {
+
+		this.setState({
+			savedCities: JSON.parse(localStorage.getItem("savedCities"))
+		})
+
+
 		navigator.geolocation.getCurrentPosition(function(position) {
 		  	new APIRequest().reverseLookup().then(res => {
 
@@ -53,6 +63,8 @@ export default class Home extends React.Component {
 		  		});
 		  	});
 		}.bind(this));	
+
+		this.quickWeather();
 	}
 
 	handleChange = (e) => {
@@ -61,7 +73,7 @@ export default class Home extends React.Component {
 
 	updateLocation(res, action) {
 		let data = res[0];
-
+		console.log(data)
 		this.setState({ 
 			search: '',
 			location: {
@@ -85,7 +97,6 @@ export default class Home extends React.Component {
 			if(action === 'SUBMIT') {
 				this.props.history.push(`/weather`);
 			}
-			console.log(this.state.location)
 		});
 	}
 
@@ -101,6 +112,7 @@ export default class Home extends React.Component {
 		}
 		this.setState({ savedCities: savedCitiesCopy }, ()=> {
 			localStorage.setItem("savedCities", JSON.stringify(this.state.savedCities));
+			this.quickWeather();
 		});
 	}
 
@@ -111,21 +123,47 @@ export default class Home extends React.Component {
 		});
 	}
 
-	render() {
-		const userWeather = this.state.location.city !== '' ? <UserWeather {...this.state.location} /> : '';
+	quickWeather() {
+		
+		new APIRequest().requestCities(JSON.parse(localStorage.getItem("savedCities"))).then(res=>{
+			this.setState({ myCities: res });
+		});
+	}
 
+	displayMyCities() {
+		return this.state.myCities.map(city => {
+			console.log(city)
+			return <QuickCity name={city.name} temp={city.main.temp} weatherType={city.weather[0].main} weatherDesc={city.weather[0].description}/>
+		})
+	}
+
+	render() {
+		const userWeather = this.state.location.city !== '' ? <UserWeather {...this.state.location} {...this.state.user}  /> : '';
+		console.log('re-render')
 		return (
-			<div>
-				<form onSubmit={this.handleSubmit}>
-					<label>
-						City
-						<input type="text" name="location" value={this.state.search} onChange={this.handleChange} placeholder="toronto, canada" />
-					</label>
-					<input type="submit" value="Submit"/>
+			<div className="body">
+				<form>
+					<TextField
+						id="standard-name"
+						label="Name"
+						value={this.state.search}
+						onChange={this.handleChange}
+						placeholder="toronto, canada"
+					/>	
+					<Button variant="contained" color="primary" onClick={this.handleSubmit}	className="btn-submit">Primary</Button>					
 				</form>
-				{this.state.user.city} {this.state.user.country}
-				{userWeather}
-				<Route exact={true} path="/weather" render={(props)=> <Weather {...props} {...this.state.location} saveCityState={this.state.savedCities} saveCity={this.saveCity} /> }/>
+				<div className="content">
+					{userWeather}
+					<aside>
+						{this.displayMyCities()}
+					</aside>				
+				</div>
+				<Route 	exact={true} 
+						path="/weather" 
+						render={(props)=> <Weather {...props} {...this.state.location} 
+											saveCityState={this.state.savedCities} 
+											saveCity={this.saveCity} /> }
+										/>									
 			</div>
 		)
 	}
