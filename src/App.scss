@@ -49,6 +49,9 @@ sup {
   .quick-city__temp { 
     font-size: 30px;
     margin-right: 7px;
+    sup {
+      font-size: 13px;
+    }
   }
   .user-temp {
     position: relative;
@@ -59,6 +62,32 @@ sup {
       display: flex;
       flex-direction: column;
       padding: 0 3rem;
+      font-size: 25px;
+      margin-top: 40px;
+
+      .user-temp__desc2 {
+        font-size: 16px;
+        color: #969696;        
+      }
+      .user-temp__desc3 {
+        display: flex;
+        p {
+          font-size: 14px;
+          color: #838383;
+        }
+
+        span {
+          font-size: 30px;
+        }
+
+        sup {
+          font-size: 13px;          
+        }
+
+        .user-temp__high {
+          margin-right: 1rem;
+        }
+      }
     }
   }
 } 
@@ -155,3 +184,8 @@ form {
   width: 26%;
   font-size: 14px;
 }
+
+.toggle {
+  justify-content: flex-end;
+}
+

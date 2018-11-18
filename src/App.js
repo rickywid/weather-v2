@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch as RouterSwitch, Route } from 'react-router-dom';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import APIRequest from './services/request';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -14,6 +17,7 @@ class App extends Component {
     super(props); 
     this.saveCity = this.saveCity.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
 
     this.state = {
         location: {
@@ -38,7 +42,8 @@ class App extends Component {
             city: '',
             country: ''
         },
-            myCities: []
+        myCities: [],
+        checked: false
         }
     }
 
@@ -97,7 +102,9 @@ class App extends Component {
     }
 
     updateLocation(res) {
+        
         let data = res[0];
+        console.log(data)
         this.setState({ 
             location: {
                 city: data.name,
@@ -115,7 +122,13 @@ class App extends Component {
                     desc: data.weather[0].description 
                 },
                 week: res[1].list
-            }
+            },
+        });
+    }
+
+    handleToggle() {
+        this.setState({ 
+            checked: !this.state.checked 
         });
     }
 
@@ -128,6 +141,7 @@ class App extends Component {
         const homeProps = {
             location: this.state.location,
             myCities: this.state.myCities,
+            checked: this.state.checked,
             saveCity: this.saveCity,
             updateLocation: this.updateLocation
         }
@@ -140,9 +154,22 @@ class App extends Component {
         return (
             <div className="App">
                 <NavBar {...navbarProps} />
-                <div className="App-inner">               
+                <div className="App-inner">   
+                  <FormGroup row className="toggle">
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={this.state.checked}
+                          onChange={this.handleToggle}
+                          value="checkedB"
+                          color="primary"
+                        />
+                      }
+                      label="C&#176; / F&#176;"
+                    />
+                  </FormGroup>                            
                     <BrowserRouter>
-                        <Switch>
+                        <RouterSwitch>
                             <Route exact={true} path="/" render={(props) => <Home 
                                                                     {...props} 
                                                                     {...homeProps}
@@ -153,7 +180,7 @@ class App extends Component {
                                                                 />}
                             />                                   
                             <Route component={NoMatch} />
-                        </Switch>
+                        </RouterSwitch>
                     </BrowserRouter>
                 </div>
             </div>

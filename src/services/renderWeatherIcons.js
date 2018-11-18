@@ -2,7 +2,6 @@ import React from 'react';
 
 export const renderWeatherIcons = (data)=>{
 		return data.map((weather, index) => {
-			console.log(weather)
 			const date = weather.date ? weather.date.split(",")[0] : '';
 	
 			if(weather.weatherDesc.toLowerCase().indexOf('clouds') > -1) {

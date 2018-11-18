@@ -13,7 +13,6 @@ export default class Home extends React.Component {
 
     displayMyCities() {
         return this.props.myCities.map(city => {
-        	console.log(city)
             return <QuickCity 	name={city.name} 
             					country={city.sys.country} 
             					temp={city.main.temp}  
@@ -21,6 +20,7 @@ export default class Home extends React.Component {
             					tempMax={city.main.temp_max}
             					weatherType={city.weather[0].main} 
             					weatherDesc={city.weather[0].description}
+            					checked={this.props.checked}
             					updateLocation={this.props.updateLocation}
             		/>
         })
@@ -67,11 +67,11 @@ export default class Home extends React.Component {
 		];
 
 	    const fiveDayForecast = [
-			convertTemp(location.week[3].main.temp), 
-			convertTemp(location.week[11].main.temp), 
-			convertTemp(location.week[19].main.temp), 
-			convertTemp(location.week[27].main.temp), 
-			convertTemp(location.week[35].main.temp)
+			convertTemp(location.week[3].main.temp, this.props.checked),
+			convertTemp(location.week[11].main.temp, this.props.checked), 
+			convertTemp(location.week[19].main.temp, this.props.checked), 
+			convertTemp(location.week[27].main.temp, this.props.checked), 
+			convertTemp(location.week[35].main.temp, this.props.checked)
 		]
 
 		const chartData = {
@@ -116,12 +116,15 @@ export default class Home extends React.Component {
 
 							{renderWeatherIcons([{weatherDesc: location.weather.main, date: ''}])}
 
-							<p className="user-temp__main">{convertTemp(location.main.temp)}<sup>&#176;c</sup></p>
+							<p className="user-temp__main">{convertTemp(location.main.temp, this.props.checked)}<sup>&#176;{this.props.checked ? 'F' : 'C'}</sup></p>
 							<div className="user-temp__detail">
-								<p>{convertTemp(location.main.temp_min)} C</p>
-								<p>{convertTemp(location.main.temp_max)} C</p>
-								<p>{location.weather.main}</p>
-								<p>{location.weather.desc}</p>		
+								<p className="user-temp__desc">{location.weather.main}</p>
+								<p className="user-temp__desc2">{location.weather.desc}</p>		
+								<div className="user-temp__desc3">
+								{console.log(this.props.location.main)}
+									<p className="user-temp__high">High <span>{convertTemp(this.props.location.main.tempMax,this.props.checked)}<sup>&#176;{this.props.checked ? 'F' : 'C'}</sup></span></p>
+									<p className="user-temp__high">Low <span>{convertTemp(this.props.location.main.tempMin, this.props.checked)}<sup>&#176;{this.props.checked ? 'F' : 'C'}</sup></span></p>								
+								</div>
 							</div>
 						</div>
                     </div>
