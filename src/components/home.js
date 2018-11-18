@@ -25,47 +25,115 @@ export default class Home extends React.Component {
 			return <Button variant="contained" color="primary" onClick={this.handleClick.bind(this,'ADD')} className="btn-save">Save location</Button>
 
 	}
-	renderWeatherIcons(data, type) {
+	renderWeatherIcons(data) {
 
-		return data.map(weather => {
-			if(weather.toLowerCase().indexOf('clouds') > -1) {
-				return 	<i className="wi wi-day-cloudy" />;
+		return data.map((weather, index) => {
+
+			const date = weather.date.split(",")[0]
+	
+			if(weather.weatherDesc.toLowerCase().indexOf('clouds') > -1) {
+				return 	(
+					<div>
+						<i className="wi wi-day-cloudy" />
+						<p>{date}</p>
+					</div>
+				)
 			}
-			else if(weather.toLowerCase().indexOf('clear') > -1){
-				return <i className="wi wi-day-sunny" />
+			else if(weather.weatherDesc.toLowerCase().indexOf('clear') > -1){
+				return (
+					<div>
+						<i className="wi wi-day-sunny" />
+						<p>{date}</p>
+					</div>					
+				)
 			}
-			else if(weather.toLowerCase().indexOf('thunderstorm') > -1) {
-				return 	<i className="wi wi-day-thunderstorm" />;
+			else if(weather.weatherDesc.toLowerCase().indexOf('thunderstorm') > -1) {
+				return (
+					<div>
+						<i className="wi wi-day-thunderstorm" />
+						<p>{date}</p>
+					</div>					
+				)
 			}
-			else if(weather.toLowerCase().indexOf('drizzle') > -1){
-				return <i className="wi wi-day-sprinkle" />
+			else if(weather.weatherDesc.toLowerCase().indexOf('drizzle') > -1){
+				return (
+					<div>
+						<i className="wi wi-day-sprinkle" />
+						<p>{date}</p>
+					</div>					
+				)
 			}
-			else if(weather.toLowerCase().indexOf('rain') > -1 || weather.toLowerCase().indexOf('mist') > -1){
-				return <i className="wi wi-day-rain" />
+			else if(weather.weatherDesc.toLowerCase().indexOf('rain') > -1 || weather.weatherDesc.toLowerCase().indexOf('mist') > -1){
+				return (
+					<div>
+						<i className="wi wi-day-rain" />
+						<p>{date}</p>
+					</div>					
+				)
 			}			
-			else if(weather.toLowerCase().indexOf('snow') > -1){
-				return <i className="wi wi-snow" />
+			else if(weather.weatherDesc.toLowerCase().indexOf('snow') > -1){
+				return (
+					<div>
+						<i className="wi wi-snow" />
+						<p>{date}</p>
+					</div>					
+				)
 			}			
-			else if(weather.toLowerCase().indexOf('smoke') > -1) {
-				return <i className="wi wi-smoke" />				
+			else if(weather.weatherDesc.toLowerCase().indexOf('smoke') > -1) {
+				return (
+					<div>
+						<i className="wi wi-smoke" />
+						<p>{date}</p>
+					</div>					
+				)		
 			} 
-			else if(weather.toLowerCase().indexOf('haze') > -1) {
-				return <i className="wi wi-day-haze" />				
+			else if(weather.weatherDesc.toLowerCase().indexOf('haze') > -1) {
+				return (
+					<div>
+						<i className="wi wi-day-haze" />
+						<p>{date}</p>
+					</div>					
+				)			
 			} 
-			else if(weather.toLowerCase().indexOf('dust whirls') > -1 || weather.toLowerCase().indexOf('sand') > -1) {
-				return <i className="wi wi-sandstorm" />				
+			else if(weather.weatherDesc.toLowerCase().indexOf('dust whirls') > -1 || weather.weatherDesc.toLowerCase().indexOf('sand') > -1) {
+				return (
+					<div>
+						<i className="wi wi-sandstorm" />
+						<p>{date}</p>
+					</div>					
+				)			
 			} 
-			else if(weather.toLowerCase().indexOf('fog') > -1) {
-				return <i className="wi wi-day-fog" />				
+			else if(weather.weatherDesc.toLowerCase().indexOf('fog') > -1) {
+				return (
+					<div>
+						<i className="wi wi-day-fog" />
+						<p>{date}</p>
+					</div>					
+				)				
 			} 
-			else if(weather.toLowerCase().indexOf('volcanic ash') > -1) {
-				return <i className="wi wi-volcano" />						
+			else if(weather.weatherDesc.toLowerCase().indexOf('volcanic ash') > -1) {
+				return (
+					<div>
+						<i className="wi wi-volcano" />
+						<p>{date}</p>
+					</div>					
+				)					
 			} 
-			else if(weather.toLowerCase().indexOf('squalls') > -1) {
-				return <i className="wi wi-sleet" />				
+			else if(weather.weatherDesc.toLowerCase().indexOf('squalls') > -1) {
+				return (
+					<div>
+						<i className="wi wi-sleet" />
+						<p>{date}</p>
+					</div>					
+				)			
 			}
-			else if(weather.toLowerCase().indexOf('tornado') > -1) {
-				return <i className="wi wi-tornado" />				
+			else if(weather.weatherDesc.toLowerCase().indexOf('tornado') > -1) {
+				return (
+					<div>
+						<i className="wi wi-tornado" />
+						<p>{date}</p>
+					</div>					
+				)			
 			}									
 		})
 	}
@@ -78,11 +146,28 @@ export default class Home extends React.Component {
 	      slidesToScroll: 1
 	    };
 
-	    const fiveDayForecastDesc = [this.props.location.week[3].weather[0].main,
-	    						this.props.location.week[11].weather[0].main,
-								this.props.location.week[19].weather[0].main,
-								this.props.location.week[27].weather[0].main,
-								this.props.location.week[35].weather[0].main]
+	    const fiveDayForecastDesc = [
+								{
+									weatherDesc: this.props.location.week[3].weather[0].main,
+									date: moment(this.props.location.week[3].dt_txt).format("ll")
+								},
+								{
+									weatherDesc: this.props.location.week[11].weather[0].main,
+									date: moment(this.props.location.week[11].dt_txt).format("ll")
+								},
+								{
+									weatherDesc: this.props.location.week[19].weather[0].main,
+									date: moment(this.props.location.week[19].dt_txt).format("ll")
+								},
+								{
+									weatherDesc: this.props.location.week[27].weather[0].main,
+									date: moment(this.props.location.week[27].dt_txt).format("ll")
+								},
+								{
+									weatherDesc: this.props.location.week[35].weather[0].main,
+									date: moment(this.props.location.week[35].dt_txt).format("ll")
+								}
+							];
 
 	    const fiveDayForecast = [Math.ceil(this.props.location.week[3].main.temp - 273.15), 
 							Math.ceil(this.props.location.week[11].main.temp - 273.15), 
@@ -129,7 +214,7 @@ export default class Home extends React.Component {
 
 						<div className="user-temp__inner">
 
-							{this.renderWeatherIcons([this.props.location.weather.main])}
+							{/*this.renderWeatherIcons([this.props.location.weather.main])*/}
 
 							<p className="user-temp__main">{Math.ceil(this.props.location.main.temp - 273.15)}<sup>&#176;c</sup></p>
 							<div className="user-temp__detail">
