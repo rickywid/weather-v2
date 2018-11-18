@@ -3,7 +3,10 @@ class APIRequest {
 		this.apiKey =  "45c4b9b7ef7e561a24ebdbf9f36f4e44"; //bf9e0d64e01426353f9edd3d027204a8
 	}
 	getDailyWeather(location, type) {
-		return fetch(`https://api.openweathermap.org/data/2.5/${type}?q=${location}&appid=${this.apiKey}`)
+		
+		const name = location.trim().replace(/ /g, '+');
+
+		return fetch(`https://api.openweathermap.org/data/2.5/${type}?q=${name}&appid=${this.apiKey}`)
 		  .then(function(response) {
 		    return response.json();
 		  })
