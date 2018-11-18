@@ -41,8 +41,14 @@ sup {
   .quick-city__name { font-weight: bold; }
 
   .user-temp {
+    position: relative;
     .user-temp__main { 
       font-size: 10rem; 
+    }
+    .user-temp__detail {
+      display: flex;
+      flex-direction: column;
+      padding: 0 3rem;
     }
   }
 } 
@@ -73,13 +79,29 @@ form {
   display: flex;
   justify-content: space-between;
 
+  .btn-save {
+    align-self: flex-start;
+    position: absolute;
+    right: 0;    
+  }
+
   .user-temp__body, .user-temp__side {
     flex: 1;
+
+    .user-temp__fiveday {
+      display: flex;
+      justify-content: space-around;      
+    }
   }
 
   .user-temp__body{
     border-right: 1px solid #85919f40;
     margin-right: 5rem; 
+
+    .user-temp__inner {
+      display: flex;
+      align-items: center;      
+    }
   }
 }
 .slick-arrow.slick-next,
@@ -87,4 +109,9 @@ form {
   &:before {
     color: #cecece;
   }
+}
+
+.wi {
+  font-size: 4rem;
+  color: #c0d0e1;
 }
