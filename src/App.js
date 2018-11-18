@@ -128,7 +128,8 @@ class App extends Component {
         const homeProps = {
             location: this.state.location,
             myCities: this.state.myCities,
-            saveCity: this.saveCity
+            saveCity: this.saveCity,
+            updateLocation: this.updateLocation
         }
 
 

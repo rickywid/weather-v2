@@ -38,8 +38,18 @@ sup {
 .body {
   margin: 5rem 0;
 
-  .quick-city__name { font-weight: bold; }
 
+  .quick-city-body {
+    &:hover {
+      background: #c1d1e14f;
+      cursor: pointer;
+    }
+  }
+  .quick-city__name { font-weight: bold; }
+  .quick-city__temp { 
+    font-size: 30px;
+    margin-right: 7px;
+  }
   .user-temp {
     position: relative;
     .user-temp__main { 
@@ -120,4 +130,28 @@ form {
 .slick-track {
   margin: 0;
   text-align: center;
+}
+
+.x {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.quick-city__weather-temp {
+  text-align: left;
+  line-height: 1;
+  display: flex;
+  align-items: center;  
+}
+.quick-city__weather-desc {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  color: #828282;
+  margin: 0 auto;
+  width: 26%;
+  font-size: 14px;
 }

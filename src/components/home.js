@@ -9,7 +9,16 @@ export default class Home extends React.Component {
 
     displayMyCities() {
         return this.props.myCities.map(city => {
-            return <QuickCity name={city.name} temp={city.main.temp} weatherType={city.weather[0].main} weatherDesc={city.weather[0].description}/>
+        	console.log(city)
+            return <QuickCity 	name={city.name} 
+            					country={city.sys.country} 
+            					temp={city.main.temp}  
+            					tempMin={city.main.temp_min}
+            					tempMax={city.main.temp_max}
+            					weatherType={city.weather[0].main} 
+            					weatherDesc={city.weather[0].description}
+            					updateLocation={this.props.updateLocation}
+            		/>
         })
     }
     handleClick(ACTION) {
@@ -142,7 +151,7 @@ export default class Home extends React.Component {
 	      dots: false,
 	      infinite: false,
 	      speed: 500,
-	      slidesToShow: 5,
+	      slidesToShow: 7,
 	      slidesToScroll: 1
 	    };
 
