@@ -28,6 +28,8 @@ export default class NavBar extends React.Component {
 	render() {
 		return (
 			<nav>
+				<h1>SOME BLAH BLAH HEADER GOES OVER HERE</h1>
+				<h3>SUBHEADER GOES OVER HERE</h3>
                 <form>
                     <TextField
                         id="standard-name"

@@ -1,34 +1,90 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+// @import url('src/assets/styles/weather-icons-wind.min.scss');
+// @import url('src/assets/styles/weather-icons.min.scss');
 
 body {
-  background: #3716007a;  
+  font-family: 'Playfair Display', serif;
+}
+button {
+  font-weight: bold !important;
 }
 .App-inner {
   max-width: 1200px;
   margin: 0 auto;  
 }
-p, h1,h2,h3,h4,h5,h6 {
+p {
 	padding: 0;
 	margin: 0;
 }
+
 nav{
-  height: 100px;
+  height: 30rem;
   background: #0019377a;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  h1,h3 {
+    color: white;
+  }
+}
+
+sup {
+  font-size: 47px;
 }
 .body {
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 5rem 0;
+
+  .quick-city__name { font-weight: bold; }
+
+  .user-temp {
+    .user-temp__main { 
+      font-size: 10rem; 
+    }
+  }
 } 
 
 form {
   display: flex;
   flex-direction: column;
+  width: 40%;
   .btn-submit {
-    align-self: flex-end;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 1rem;
+    font-weight: bold;
+    background-color: #3fb596;
+
+    &:hover{
+      background-color: #38a78a;
+    }
   }
 }
 
 .quick-cities {
 	display: flex;
+}
+
+.user-temp {
+  margin: 5rem 0;
+  display: flex;
+  justify-content: space-between;
+
+  .user-temp__body, .user-temp__side {
+    flex: 1;
+  }
+
+  .user-temp__body{
+    border-right: 1px solid #85919f40;
+    margin-right: 5rem; 
+  }
+}
+.slick-arrow.slick-next,
+.slick-arrow.slick-prev {
+  &:before {
+    color: #cecece;
+  }
 }

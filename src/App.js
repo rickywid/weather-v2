@@ -23,14 +23,14 @@ class App extends Component {
             cityId: null,               
             coord: {},
             main: {
-            temp: null,
-            tempMax: null,
-            tempMin: null
-        },
+                temp: null,
+                tempMax: null,
+                tempMin: null
+            },
             weather: {
-            mainDesc: '',
-            desc: ''
-        },
+                mainDesc: '',
+                desc: ''
+            },
             week: []
         },
         savedCities: [],

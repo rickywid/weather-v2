@@ -3,8 +3,15 @@ import QuickCity from './/quick-city';
 import Slider from "react-slick";
 import Button from '@material-ui/core/Button';
 
-
 export default class Home extends React.Component {
+
+
+	componentDidMount() {
+
+
+		let days = [this.props.location.week[3], this.props.location.week[11], this.props.location.week[19], this.props.location.week[35]];
+
+	}
 
     displayMyCities() {
     	console.log('displayMyCities')
@@ -27,8 +34,8 @@ export default class Home extends React.Component {
 	}
 	render() {
 	    var settings = {
-	      dots: true,
-	      infinite: true,
+	      dots: false,
+	      infinite: false,
 	      speed: 500,
 	      slidesToShow: 5,
 	      slidesToScroll: 1
@@ -37,20 +44,26 @@ export default class Home extends React.Component {
 		return (
 			<div className="body">
 				
-				<h1>Quick Weather</h1>
+				<h3>Quick Weather</h3>
 				<Slider {...settings}>
 					{this.displayMyCities()}
 				</Slider>
 
 				<div className="user-temp">
-					<h2>{this.props.location.city}, {this.props.location.country}</h2>
-					<p>temp {this.props.location.main.temp}</p>
-					<p>min {this.props.location.main.temp_min}</p>
-					<p>max {this.props.location.main.temp_max}</p>
-					<p>{this.props.location.weather.main}</p>
-					<p>{this.props.location.weather.desc}</p>
-					{this.displaySaveBtnCity()}
-                                     
+					<div className="user-temp__body">
+						<h3>{this.props.location.city}, {this.props.location.country}</h3>
+						<p className="user-temp__main">{Math.ceil(this.props.location.main.temp - 273.15)}<sup>&#176;c</sup></p>
+						<p>{Math.ceil(this.props.location.main.temp - 273.15)}C</p>
+						<p>{Math.ceil(this.props.location.main.temp_min - 273.15)}C</p>
+						<p>{Math.ceil(this.props.location.main.temp_max - 273.15)}C</p>
+						<p>{this.props.location.weather.main}</p>
+						<p>{this.props.location.weather.desc}</p>
+						{this.displaySaveBtnCity()}
+                    </div>
+                    <div className="user-temp__side">
+						<h3>5 day</h3>
+						<h3>temp</h3>
+                    </div>
 				</div>
 			</div>
 		)
