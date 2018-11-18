@@ -1,5 +1,6 @@
 import React from 'react';
 import APIRequest from '../services/request';
+import {convertTemp} from '../services/convertTemp';
 
 export default class QuickCity extends React.Component {
 	constructor(props){
@@ -16,11 +17,14 @@ export default class QuickCity extends React.Component {
 	}
 
 	render() {
+
+		const { location } = this.props;
+		
 		return (
 				<div className="quick-city-body" onClick={this.handleClick}>
 					<p className="quick-city__name">{this.props.name}, {this.props.country}</p>
 					<div className="x">
-						<p className="quick-city__temp">{Math.ceil(this.props.temp - 273.15)}C</p>
+						<p className="quick-city__temp">{convertTemp(this.props.temp)}C</p>
 						<p className="quick-city__weather-desc">{this.props.weatherDesc}</p>						
 					</div>
 			</div>

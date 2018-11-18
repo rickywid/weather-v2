@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import Button from '@material-ui/core/Button';
 import {Line} from 'react-chartjs-2';
 import moment from 'moment';
+import {convertTemp} from '../services/convertTemp';
 
 export default class Home extends React.Component {
 
@@ -147,6 +148,10 @@ export default class Home extends React.Component {
 		})
 	}
 	render() {
+
+		const { location } = this.props;
+
+
 	    const settings = {
 	      dots: false,
 	      infinite: false,
@@ -219,19 +224,18 @@ export default class Home extends React.Component {
 				<div className="user-temp">
 					{this.displaySaveBtnCity()}
 					<div className="user-temp__body">
-						<h3>{this.props.location.city}, {this.props.location.country}</h3>
+						<h3>{location.city}, {location.country}</h3>
 
 						<div className="user-temp__inner">
 
-							{this.renderWeatherIcons([{weatherDesc: this.props.location.weather.main, date: ''}])}
+							{this.renderWeatherIcons([{weatherDesc: location.weather.main, date: ''}])}
 
-							<p className="user-temp__main">{Math.ceil(this.props.location.main.temp - 273.15)}<sup>&#176;c</sup></p>
+							<p className="user-temp__main">{convertTemp(location.main.temp)}<sup>&#176;c</sup></p>
 							<div className="user-temp__detail">
-								<p>{Math.ceil(this.props.location.main.temp - 273.15)}C</p>
-								<p>{Math.ceil(this.props.location.main.temp_min - 273.15)}C</p>
-								<p>{Math.ceil(this.props.location.main.temp_max - 273.15)}C</p>
-								<p>{this.props.location.weather.main}</p>
-								<p>{this.props.location.weather.desc}</p>
+								<p>{convertTemp(location.main.temp_min)} C</p>
+								<p>{convertTemp(location.main.temp_max)} C</p>
+								<p>{location.weather.main}</p>
+								<p>{location.weather.desc}</p>		
 							</div>
 						</div>
                     </div>
