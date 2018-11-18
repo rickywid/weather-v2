@@ -28,8 +28,8 @@ export default class Home extends React.Component {
 	renderWeatherIcons(data) {
 
 		return data.map((weather, index) => {
-
-			const date = weather.date.split(",")[0]
+			console.log(weather)
+			const date = weather.date ? weather.date.split(",")[0] : '';
 	
 			if(weather.weatherDesc.toLowerCase().indexOf('clouds') > -1) {
 				return 	(
@@ -214,7 +214,7 @@ export default class Home extends React.Component {
 
 						<div className="user-temp__inner">
 
-							{/*this.renderWeatherIcons([this.props.location.weather.main])*/}
+							{this.renderWeatherIcons([{weatherDesc: this.props.location.weather.main, date: ''}])}
 
 							<p className="user-temp__main">{Math.ceil(this.props.location.main.temp - 273.15)}<sup>&#176;c</sup></p>
 							<div className="user-temp__detail">
