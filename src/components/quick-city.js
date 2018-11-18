@@ -1,11 +1,7 @@
 import React from 'react';
 
 export default class QuickCity extends React.Component {
-	constructor(){
-		super();
 
-		console.log('called')
-	}
 	render() {
 		return (
 				<div className="quick-city-body">

@@ -98,9 +98,7 @@ class App extends Component {
 
     updateLocation(res) {
         let data = res[0];
-        console.log(data)
         this.setState({ 
-            search: '',
             location: {
                 city: data.name,
                 country: data.sys.country,                  

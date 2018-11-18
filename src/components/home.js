@@ -8,7 +8,6 @@ import moment from 'moment';
 export default class Home extends React.Component {
 
     displayMyCities() {
-    	console.log('displayMyCities')
         return this.props.myCities.map(city => {
             return <QuickCity name={city.name} temp={city.main.temp} weatherType={city.weather[0].main} weatherDesc={city.weather[0].description}/>
         })
@@ -26,49 +25,46 @@ export default class Home extends React.Component {
 			return <Button variant="contained" color="primary" onClick={this.handleClick.bind(this,'ADD')} className="btn-save">Save location</Button>
 
 	}
-	renderWeatherIcons(data) {
-		return data.map(weather => {
+	renderWeatherIcons(data, type) {
 
-			if(weather.toLowerCase().indexOf('clouds')) {
+		return data.map(weather => {
+			if(weather.toLowerCase().indexOf('clouds') > -1) {
 				return 	<i className="wi wi-day-cloudy" />;
 			}
-			else if(weather.toLowerCase().indexOf('clear')){
+			else if(weather.toLowerCase().indexOf('clear') > -1){
 				return <i className="wi wi-day-sunny" />
 			}
-			else if(weather.toLowerCase().indexOf('thunderstorm')) {
+			else if(weather.toLowerCase().indexOf('thunderstorm') > -1) {
 				return 	<i className="wi wi-day-thunderstorm" />;
 			}
-			else if(weather.toLowerCase().indexOf('drizzle')){
+			else if(weather.toLowerCase().indexOf('drizzle') > -1){
 				return <i className="wi wi-day-sprinkle" />
 			}
-			else if(weather.toLowerCase().indexOf('rain') || weather.toLowerCase().indexOf('mist')){
+			else if(weather.toLowerCase().indexOf('rain') > -1 || weather.toLowerCase().indexOf('mist') > -1){
 				return <i className="wi wi-day-rain" />
 			}			
-			else if(weather.toLowerCase().indexOf('snow')){
+			else if(weather.toLowerCase().indexOf('snow') > -1){
 				return <i className="wi wi-snow" />
 			}			
-			else if(weather.toLowerCase().indexOf('clear')){
-				return <i className="wi wi-cloud" />
-			} 
-			else if(weather.toLowerCase().indexOf('smoke')) {
+			else if(weather.toLowerCase().indexOf('smoke') > -1) {
 				return <i className="wi wi-smoke" />				
 			} 
-			else if(weather.toLowerCase().indexOf('haze')) {
+			else if(weather.toLowerCase().indexOf('haze') > -1) {
 				return <i className="wi wi-day-haze" />				
 			} 
-			else if(weather.toLowerCase().indexOf('dust whirls') || weather.toLowerCase().indexOf('sand')) {
+			else if(weather.toLowerCase().indexOf('dust whirls') > -1 || weather.toLowerCase().indexOf('sand') > -1) {
 				return <i className="wi wi-sandstorm" />				
 			} 
-			else if(weather.toLowerCase().indexOf('fog')) {
+			else if(weather.toLowerCase().indexOf('fog') > -1) {
 				return <i className="wi wi-day-fog" />				
 			} 
-			else if(weather.toLowerCase().indexOf('volcanic ash')) {
+			else if(weather.toLowerCase().indexOf('volcanic ash') > -1) {
 				return <i className="wi wi-volcano" />						
 			} 
-			else if(weather.toLowerCase().indexOf('squalls')) {
+			else if(weather.toLowerCase().indexOf('squalls') > -1) {
 				return <i className="wi wi-sleet" />				
 			}
-			else if(weather.toLowerCase().indexOf('tornado')) {
+			else if(weather.toLowerCase().indexOf('tornado') > -1) {
 				return <i className="wi wi-tornado" />				
 			}									
 		})
@@ -105,6 +101,10 @@ export default class Home extends React.Component {
 			datasets: [
 				{
 					label: "5 DAY FOREACAST",
+					backgroundColor: '#0074ff0f',
+					borderColor: "#85919f",
+					borderWidth: 1,
+					pointBackgroundColor: "#85919f",
 					data: fiveDayForecast
 				}
 			]
@@ -118,13 +118,19 @@ export default class Home extends React.Component {
 					{this.displayMyCities()}
 				</Slider>
 
+
+
+
+
 				<div className="user-temp">
 					{this.displaySaveBtnCity()}
 					<div className="user-temp__body">
 						<h3>{this.props.location.city}, {this.props.location.country}</h3>
 
 						<div className="user-temp__inner">
-						<i className="wi wi-night-sleet" />
+
+							{this.renderWeatherIcons([this.props.location.weather.main])}
+
 							<p className="user-temp__main">{Math.ceil(this.props.location.main.temp - 273.15)}<sup>&#176;c</sup></p>
 							<div className="user-temp__detail">
 								<p>{Math.ceil(this.props.location.main.temp - 273.15)}C</p>

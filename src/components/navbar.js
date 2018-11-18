@@ -10,9 +10,6 @@ export default class NavBar extends React.Component {
 
 		this.state = { search: ''};
 	}
-	componentDidMount(){
-		console.log(this.props)
-	}
 
     handleChange = (e) => {
         this.setState({ search: e.target.value });
@@ -21,16 +18,17 @@ export default class NavBar extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         new APIRequest().request(this.state.search).then(res=>{
-        	console.log(this)
             this.props.updateLocation(res);
         });
+
+        this.setState({ search: '' });
     }
 	render() {
 		return (
 			<nav>
 				<h1>SOME BLAH BLAH HEADER GOES OVER HERE</h1>
 				<h3>SUBHEADER GOES OVER HERE</h3>
-                <form>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     <TextField
                         id="standard-name"
                         label="Name"
@@ -38,7 +36,7 @@ export default class NavBar extends React.Component {
                         onChange={this.handleChange}
                         placeholder="toronto, canada"
                     />  
-                    <Button variant="contained" color="primary" onClick={this.handleSubmit.bind(this)} className="btn-submit">Search</Button>                 
+                    <Button type="submit" onSubmit={this.handleSubmit.bind(this)} variant="contained" color="primary" className="btn-submit">Search</Button>                 
                 </form>  		
 			</nav>
 		)
