@@ -4,7 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const url = window.location.href;
+let build = 'PRODUCTION';
+
+if(url.indexOf('localhost') > -1) {
+	build = 'LOCAL'
+}
+
+ReactDOM.render(<App build={build} />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

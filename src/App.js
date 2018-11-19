@@ -50,6 +50,8 @@ class App extends Component {
 
     componentDidMount() {
 
+
+
         // if there are no saved cities by default, then preload some cities
         if(localStorage.getItem("savedCities") === null){
             localStorage.setItem("savedCities", JSON.stringify(["london", "new york", "paris", "tokyo", "toronto", "sydney", "moscow", "rome", "berlin"]));
@@ -162,7 +164,6 @@ class App extends Component {
             updateLocation: this.updateLocation
         }
 
-
         if(this.state.location.city === ''){
             return <div>...</div>
         }
@@ -189,7 +190,7 @@ class App extends Component {
                     </FormGroup>                            
                         <BrowserRouter>
                             <RouterSwitch>
-                                <Route exact={true} path="/" render={(props) => <Home 
+                                <Route exact={true} path={`${this.props.build === 'LOCAL' ? '/' : 'weather-v2'}`} render={(props) => <Home 
                                                                         {...props} 
                                                                         {...homeProps}
                                                                     />}
