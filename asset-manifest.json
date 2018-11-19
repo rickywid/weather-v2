@@ -1,0 +1,16 @@
+{
+  "main.css": "/openweather/static/css/main.2b78d09e.chunk.css",
+  "main.js": "/openweather/static/js/main.45ffc470.chunk.js",
+  "main.js.map": "/openweather/static/js/main.45ffc470.chunk.js.map",
+  "static/css/1.3250e48f.chunk.css": "/openweather/static/css/1.3250e48f.chunk.css",
+  "static/js/1.159a2278.chunk.js": "/openweather/static/js/1.159a2278.chunk.js",
+  "static/js/1.159a2278.chunk.js.map": "/openweather/static/js/1.159a2278.chunk.js.map",
+  "runtime~main.js": "/openweather/static/js/runtime~main.e8f68946.js",
+  "runtime~main.js.map": "/openweather/static/js/runtime~main.e8f68946.js.map",
+  "static/media/App.scss": "/openweather/static/media/slick.d41f55a7.ttf",
+  "static/css/main.2b78d09e.chunk.css.map": "/openweather/static/css/main.2b78d09e.chunk.css.map",
+  "static/css/1.3250e48f.chunk.css.map": "/openweather/static/css/1.3250e48f.chunk.css.map",
+  "index.html": "/openweather/index.html",
+  "precache-manifest.47331c5611f9889591461e58de7d6578.js": "/openweather/precache-manifest.47331c5611f9889591461e58de7d6578.js",
+  "service-worker.js": "/openweather/service-worker.js"
+}
