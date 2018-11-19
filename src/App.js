@@ -43,7 +43,8 @@ class App extends Component {
             country: ''
         },
         myCities: [],
-        checked: false
+        checked: false,
+        notFound: false
         }
     }
 
@@ -102,7 +103,17 @@ class App extends Component {
     }
 
     updateLocation(res) {
-        
+
+        if(res[1].cod === "404"){
+            console.log(true)
+            this.setState({ notFound: true });
+
+            return;
+        } else {
+            this.setState({ notFound: false });            
+        }
+
+
         let data = res[0];
 
         this.setState({ 
@@ -154,34 +165,39 @@ class App extends Component {
         return (
             <div className="App">
                 <NavBar {...navbarProps} />
-                <div className="App-inner">   
-                  <FormGroup row className="toggle">
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          checked={this.state.checked}
-                          onChange={this.handleToggle}
-                          value="checkedB"
-                          color="primary"
-                        />
-                      }
-                      label="C&#176; / F&#176;"
-                    />
-                  </FormGroup>                            
-                    <BrowserRouter>
-                        <RouterSwitch>
-                            <Route exact={true} path="/" render={(props) => <Home 
-                                                                    {...props} 
-                                                                    {...homeProps}
-                                                                />}
+                <div className="App-inner">
+
+                {this.state.notFound ? <p className="no-results">No results found</p>: 
+                <div>
+                    <FormGroup row className="toggle">
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={this.state.checked}
+                              onChange={this.handleToggle}
+                              value="checkedB"
+                              color="primary"
                             />
-                            <Route path="/weather" render={(props) => <Weather 
-                                                                    {...props} {...this.state.location}
-                                                                />}
-                            />                                   
-                            <Route component={NoMatch} />
-                        </RouterSwitch>
-                    </BrowserRouter>
+                          }
+                          label="C&#176; / F&#176;"
+                        />
+                    </FormGroup>                            
+                        <BrowserRouter>
+                            <RouterSwitch>
+                                <Route exact={true} path="/" render={(props) => <Home 
+                                                                        {...props} 
+                                                                        {...homeProps}
+                                                                    />}
+                                />
+                                <Route path="/weather" render={(props) => <Weather 
+                                                                        {...props} {...this.state.location}
+                                                                    />}
+                                />                                   
+                                <Route component={NoMatch} />
+                            </RouterSwitch>
+                        </BrowserRouter>
+                    </div>
+                }   
                 </div>
             </div>
         );

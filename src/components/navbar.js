@@ -34,6 +34,7 @@ export default class NavBar extends React.Component {
                         value={this.state.search}
                         onChange={this.handleChange}
                         placeholder="toronto, canada"
+                        required
                     />  
                     <Button type="submit" onSubmit={this.handleSubmit.bind(this)} variant="contained" color="primary" className="btn-submit">Search</Button>                 
                 </form>  		
