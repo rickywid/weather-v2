@@ -190,7 +190,7 @@ class App extends Component {
                     </FormGroup>                            
                         <BrowserRouter>
                             <RouterSwitch>
-                                <Route exact={true} path={`${this.props.build === 'LOCAL' ? '/' : 'weather-v2'}`} render={(props) => <Home 
+                                <Route exact={true} path={`${this.props.build === 'LOCAL' ? '/' : '/weather-v2/'}`} render={(props) => <Home 
                                                                         {...props} 
                                                                         {...homeProps}
                                                                     />}
