@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/openweather/static/css/1.3250e48f.chunk.css"
   },
   {
-    "revision": "88607dc35af6bc7e40f3e4e484ef6d55",
+    "revision": "8b591921feccd10c7a01a5bdb1fc5b03",
     "url": "/openweather/index.html"
   }
 ];
