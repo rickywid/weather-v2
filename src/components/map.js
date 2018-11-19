@@ -40,7 +40,7 @@ export default class GoogleMap extends React.Component {
             <div style={{ height: '500px', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyAdOrgGoSsaX6ApmqF8WlnhNKNzbhqQuIU' }}
-                    defaultCenter={this.state.center}
+                    center={this.state.center}
                     defaultZoom={this.state.zoom}
                 >
                 </GoogleMapReact>
