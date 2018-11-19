@@ -54,11 +54,11 @@ class App extends Component {
 
         // if there are no saved cities by default, then preload some cities
         if(localStorage.getItem("savedCities") === null){
-            localStorage.setItem("savedCities", JSON.stringify(["london", "new york", "paris", "tokyo", "toronto", "sydney", "moscow", "rome", "berlin"]));
-        } else {
+            localStorage.setItem("savedCities", JSON.stringify(["London", "New York", "Paris", "Tokyo", "Toronto", "Sydney", "Moscow", "Rome", "Berlin"]));
+            
             this.setState({
                 savedCities: JSON.parse(localStorage.getItem("savedCities"))
-            })
+            })        
         }
 
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -99,7 +99,7 @@ class App extends Component {
             if(!cityFound){
                 savedCitiesCopy.unshift(city);
             }
-        } else {         
+        } else {      
             savedCitiesCopy = savedCitiesCopy.filter(item => item !== city);
         }
 
@@ -112,7 +112,6 @@ class App extends Component {
     updateLocation(res) {
 
         if(res[1].cod === "404"){
-            console.log(true)
             this.setState({ notFound: true });
 
             return;
