@@ -10,6 +10,20 @@ import Const from '../const';
 import GoogleMap from './map';
 
 export default class Home extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			savedCities: []
+		}
+	}
+
+	componentWillReceiveProps(nextProps, prevProps) {
+		
+		if(nextProps !== prevProps) {
+			this.setState({ savedCities: nextProps.savedCities})
+		}
+	}
 
     displayMyCities() {
         return this.props.myCities.map(city => {
@@ -39,11 +53,22 @@ export default class Home extends React.Component {
 
 	}
 
+	displaySlider() {
+		if(!JSON.parse(localStorage.getItem("savedCities")).length || JSON.parse(localStorage.getItem("savedCities")) === null) {
+			return <p style={{ textAlign: 'center', minHeight: '89px' }}>You have no saved locations</p>
+		}
+
+		return (
+			<Slider {...Const.slider.settings}>
+				{this.displayMyCities()}
+			</Slider>
+		)		
+	}
+
 	render() {
 
 		const { location } = this.props;
 		
-		console.log(location.week)
 	    const fiveDayForecastDesc = [
 			{
 				weatherDesc: location.week[3].weather[0].main,
@@ -98,15 +123,8 @@ export default class Home extends React.Component {
 
 		return (
 			<div className="body">
-				
-				<h3 className="quick-weather">Quick Weather</h3>
-				<Slider {...Const.slider.settings}>
-					{this.displayMyCities()}
-				</Slider>
-
-
-
-
+			
+				{this.displaySlider()}
 
 				<div className="user-temp">
 					{this.displaySaveBtnCity()}

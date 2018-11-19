@@ -38,7 +38,7 @@ export default class NavBar extends React.Component {
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <TextField
                         id="input"
-                        label="Name"
+                        label="Location"
                         value={this.state.search}
                         onChange={this.handleChange}
                         placeholder="toronto, canada"

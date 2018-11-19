@@ -21,7 +21,7 @@ p {
 
 nav{
   padding: 3rem 0;
-  background: #c7c7c7;
+  background: #ece9e9;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -110,7 +110,7 @@ form {
     font-size: 2rem;
     font-family: 'Playfair Display', serif;
     text-align: center;
-    color: white;
+    color: #5b5b5b;
   }
 
   .btn-submit {
@@ -131,7 +131,7 @@ form {
 }
 
 .user-temp {
-  margin: 5rem 0;
+  margin: 2rem 0;
   display: block;
   justify-content: space-between;
 
@@ -139,6 +139,11 @@ form {
     align-self: flex-start;
     position: absolute;
     right: 33px;    
+    background-color: #63a8d3;
+
+    &:hover {
+      background-color: #5795bb;
+    }
   }
 
   .user-temp__body, .user-temp__side {
@@ -230,6 +235,7 @@ form {
 
 .toggle {
   justify-content: flex-end;
+  margin: 1rem 0;
 }
 
 .no-results {
@@ -239,7 +245,7 @@ form {
 }
 
 .slick-slider {
-  width: 80%;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -319,7 +325,7 @@ form {
 
 
           .user-temp__high {
-            margin-right: 0;
+            margin-right: 5px;
           }
         }
 

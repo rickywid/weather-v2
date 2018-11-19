@@ -50,16 +50,14 @@ class App extends Component {
 
     componentDidMount() {
 
-
-
         // if there are no saved cities by default, then preload some cities
         if(localStorage.getItem("savedCities") === null){
-            localStorage.setItem("savedCities", JSON.stringify(["London", "New York", "Paris", "Tokyo", "Toronto", "Sydney", "Moscow", "Rome", "Berlin"]));
-            
-            this.setState({
-                savedCities: JSON.parse(localStorage.getItem("savedCities"))
-            })        
+            localStorage.setItem("savedCities", JSON.stringify(["London", "New York", "Paris", "Tokyo", "Toronto", "Sydney", "Moscow", "Rome", "Berlin"]));   
         }
+
+        this.setState({
+            savedCities: JSON.parse(localStorage.getItem("savedCities"))
+        })             
 
         navigator.geolocation.getCurrentPosition(function(position) {
             new APIRequest().reverseLookup().then(res => {
@@ -102,7 +100,7 @@ class App extends Component {
         } else {      
             savedCitiesCopy = savedCitiesCopy.filter(item => item !== city);
         }
-
+        
         this.setState({ savedCities: savedCitiesCopy }, ()=> {
             localStorage.setItem("savedCities", JSON.stringify(this.state.savedCities));
             this.quickWeather();
@@ -159,6 +157,7 @@ class App extends Component {
             location: this.state.location,
             myCities: this.state.myCities,
             checked: this.state.checked,
+            savedCities: this.state.savedCities,
             saveCity: this.saveCity,
             updateLocation: this.updateLocation
         }
