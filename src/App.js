@@ -164,7 +164,7 @@ class App extends Component {
         }
 
         if(this.state.location.city === ''){
-            return <div>...</div>
+            return <div id="loading"></div>;
         }
 
         return (

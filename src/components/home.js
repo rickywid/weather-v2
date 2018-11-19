@@ -42,7 +42,8 @@ export default class Home extends React.Component {
 	render() {
 
 		const { location } = this.props;
-
+		
+		console.log(location.week)
 	    const fiveDayForecastDesc = [
 			{
 				weatherDesc: location.week[3].weather[0].main,
@@ -61,8 +62,8 @@ export default class Home extends React.Component {
 				date: moment(location.week[27].dt_txt).format("ll")
 			},
 			{
-				weatherDesc: location.week[35].weather[0].main,
-				date: moment(location.week[35].dt_txt).format("ll")
+				weatherDesc: location.week[31].weather[0].main,
+				date: moment(location.week[31].dt_txt).format("ll")
 			}
 		];
 
@@ -71,7 +72,7 @@ export default class Home extends React.Component {
 			convertTemp(location.week[11].main.temp, this.props.checked), 
 			convertTemp(location.week[19].main.temp, this.props.checked), 
 			convertTemp(location.week[27].main.temp, this.props.checked), 
-			convertTemp(location.week[35].main.temp, this.props.checked)
+			convertTemp(location.week[31].main.temp, this.props.checked)
 		]
 
 		const chartData = {
@@ -80,7 +81,7 @@ export default class Home extends React.Component {
 				moment(this.props.location.week[11].dt_txt).format("ll"), 
 				moment(this.props.location.week[19].dt_txt).format("ll"), 
 				moment(this.props.location.week[27].dt_txt).format("ll"), 
-				moment(this.props.location.week[35].dt_txt).format("ll")
+				moment(this.props.location.week[31].dt_txt).format("ll")
 			],
 
 			datasets: [
