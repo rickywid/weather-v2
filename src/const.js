@@ -12,7 +12,8 @@ export const Const = {
 		borderColor: "#85919f",
 		borderWidth: 1,
 		pointBackgroundColor: "#85919f",	
-	}
+	},
+	mapsAPIKey: 'AIzaSyAdOrgGoSsaX6ApmqF8WlnhNKNzbhqQuIU'
 }
 
 export default Const;

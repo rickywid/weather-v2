@@ -6,6 +6,7 @@
 
 body {
   font-family: 'Playfair Display', serif;
+  padding-bottom: 3rem;
 }
 button {
   font-weight: bold !important;
@@ -20,7 +21,7 @@ p {
 }
 
 nav{
-  height: 22rem;
+  padding: 3rem 0;
   background: #0019377a;
   display: flex;
   align-items: center;
@@ -36,8 +37,6 @@ sup {
   font-size: 47px;
 }
 .body {
-  margin: 5rem 0;
-
 
   .quick-city-body {
     &:hover {
@@ -55,6 +54,9 @@ sup {
   }
   .user-temp {
     position: relative;
+    background: #f1f7f8;
+    padding: 2rem;
+
     .user-temp__main { 
       font-size: 10rem; 
     }
@@ -96,8 +98,16 @@ form {
   display: flex;
   flex-direction: column;
   width: 40%;
+
+  #input {
+    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    color: white;
+  }
+
   .btn-submit {
-    width: 50%;
+    width: 25%;
     margin: 0 auto;
     margin-top: 1rem;
     font-weight: bold;
@@ -121,11 +131,23 @@ form {
   .btn-save {
     align-self: flex-start;
     position: absolute;
-    right: 0;    
+    right: 33px;    
   }
 
   .user-temp__body, .user-temp__side {
     flex: 1;
+
+    .user-temp__location,
+    .user-temp__date {
+      margin: 0;
+      padding: 0;
+    }
+
+    .user-temp__date {
+      font-size: 14px;
+      color: #878787;
+      font-weight: normal;
+    }
 
     .user-temp__fiveday {
       display: flex;
@@ -153,7 +175,7 @@ form {
 
 .wi {
   font-size: 4rem;
-  color: #c0d0e1;
+  color: #97a6b6;
 }
 
 .slick-track {

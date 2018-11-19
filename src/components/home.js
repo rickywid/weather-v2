@@ -7,7 +7,7 @@ import moment from 'moment';
 import {convertTemp} from '../services/convertTemp';
 import {renderWeatherIcons} from '../services/renderWeatherIcons';
 import Const from '../const';
-
+import GoogleMap from './map';
 
 export default class Home extends React.Component {
 
@@ -93,7 +93,7 @@ export default class Home extends React.Component {
 					data: fiveDayForecast
 				}
 			]
-		};
+		};			
 
 		return (
 			<div className="body">
@@ -110,8 +110,8 @@ export default class Home extends React.Component {
 				<div className="user-temp">
 					{this.displaySaveBtnCity()}
 					<div className="user-temp__body">
-						<h3>{location.city}, {location.country}</h3>
-
+						<h3 className="user-temp__location">{location.city}, {location.country}</h3>
+						<h4 className="user-temp__date">{moment().format('LLL')}</h4>
 						<div className="user-temp__inner">
 
 							{renderWeatherIcons([{weatherDesc: location.weather.main, date: ''}])}
@@ -121,17 +121,12 @@ export default class Home extends React.Component {
 								<p className="user-temp__desc">{location.weather.main}</p>
 								<p className="user-temp__desc2">{location.weather.desc}</p>		
 								<div className="user-temp__desc3">
-								{console.log(this.props.location.main)}
 									<p className="user-temp__high">High <span>{convertTemp(this.props.location.main.tempMax,this.props.checked)}<sup>&#176;{this.props.checked ? 'F' : 'C'}</sup></span></p>
 									<p className="user-temp__high">Low <span>{convertTemp(this.props.location.main.tempMin, this.props.checked)}<sup>&#176;{this.props.checked ? 'F' : 'C'}</sup></span></p>								
 								</div>
 							</div>
 						</div>
                     </div>
-
-
-
-
 
                     <div className="user-temp__side">
 						<h3>5 day</h3>
@@ -142,6 +137,9 @@ export default class Home extends React.Component {
 						<Line data={chartData} />
                     </div>
 				</div>
+
+				<GoogleMap coord={this.props.location.coord} />
+			
 			</div>
 		)
 	}

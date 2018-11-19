@@ -26,11 +26,10 @@ export default class NavBar extends React.Component {
 	render() {
 		return (
 			<nav>
-				<h1>SOME BLAH BLAH HEADER GOES OVER HERE</h1>
-				<h3>SUBHEADER GOES OVER HERE</h3>
+				<h1>WeatheReactor</h1>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <TextField
-                        id="standard-name"
+                        id="input"
                         label="Name"
                         value={this.state.search}
                         onChange={this.handleChange}

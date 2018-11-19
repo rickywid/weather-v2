@@ -104,7 +104,7 @@ class App extends Component {
     updateLocation(res) {
         
         let data = res[0];
-        console.log(data)
+
         this.setState({ 
             location: {
                 city: data.name,
