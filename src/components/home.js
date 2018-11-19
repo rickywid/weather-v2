@@ -33,9 +33,9 @@ export default class Home extends React.Component {
 		let match = storage.find(city=>city===this.props.location.city);
 
 		if(match){
-			return <Button variant="contained" color="primary" onClick={this.handleClick.bind(this, 'REMOVE')} className="btn-save">Remove location</Button>
+			return <Button variant="contained" color="primary" onClick={this.handleClick.bind(this, 'REMOVE')} className="btn-save">Remove</Button>
 		}
-			return <Button variant="contained" color="primary" onClick={this.handleClick.bind(this,'ADD')} className="btn-save">Save location</Button>
+			return <Button variant="contained" color="primary" onClick={this.handleClick.bind(this,'ADD')} className="btn-save">Save</Button>
 
 	}
 
@@ -98,7 +98,7 @@ export default class Home extends React.Component {
 		return (
 			<div className="body">
 				
-				<h3>Quick Weather</h3>
+				<h3 className="quick-weather">Quick Weather</h3>
 				<Slider {...Const.slider.settings}>
 					{this.displayMyCities()}
 				</Slider>
@@ -129,12 +129,10 @@ export default class Home extends React.Component {
                     </div>
 
                     <div className="user-temp__side">
-						<h3>5 day</h3>
 						<div className="user-temp__fiveday">
 							{renderWeatherIcons(fiveDayForecastDesc)}
 						</div>
-						<h3>temp</h3>
-						<Line data={chartData} />
+						<Line data={chartData} options={{ responsive: true}}/>
                     </div>
 				</div>
 

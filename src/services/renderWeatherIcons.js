@@ -8,7 +8,7 @@ export const renderWeatherIcons = (data)=>{
 				return 	(
 					<div>
 						<i className="wi wi-day-cloudy" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>
 				)
 			}
@@ -16,7 +16,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-day-sunny" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)
 			}
@@ -24,7 +24,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-day-thunderstorm" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)
 			}
@@ -32,7 +32,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-day-sprinkle" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)
 			}
@@ -40,7 +40,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-day-rain" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)
 			}			
@@ -48,7 +48,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-snow" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)
 			}			
@@ -56,7 +56,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-smoke" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)		
 			} 
@@ -64,7 +64,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-day-haze" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)			
 			} 
@@ -72,7 +72,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-sandstorm" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)			
 			} 
@@ -80,7 +80,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-day-fog" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)				
 			} 
@@ -88,7 +88,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-volcano" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)					
 			} 
@@ -96,7 +96,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-sleet" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)			
 			}
@@ -104,7 +104,7 @@ export const renderWeatherIcons = (data)=>{
 				return (
 					<div>
 						<i className="wi wi-tornado" />
-						<p>{date}</p>
+						<p className="forecast-date">{date}</p>
 					</div>					
 				)			
 			}									

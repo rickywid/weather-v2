@@ -7,6 +7,7 @@
 body {
   font-family: 'Playfair Display', serif;
   padding-bottom: 3rem;
+  color: #4d4848;
 }
 button {
   font-weight: bold !important;
@@ -34,9 +35,13 @@ nav{
 }
 
 sup {
-  font-size: 47px;
+  font-size: 19px;
 }
 .body {
+
+  .quick-weather {
+    padding: 0 1rem;
+  }
 
   .quick-city-body {
     &:hover {
@@ -44,9 +49,13 @@ sup {
       cursor: pointer;
     }
   }
-  .quick-city__name { font-weight: bold; }
+  .quick-city__name { 
+    font-weight: bold; 
+    color: #4d4848;
+  }
   .quick-city__temp { 
     font-size: 30px;
+    color: #4d4848;
     margin-right: 7px;
     sup {
       font-size: 13px;
@@ -55,40 +64,28 @@ sup {
   .user-temp {
     position: relative;
     background: #f1f7f8;
-    padding: 2rem;
+    padding: 1rem;
 
     .user-temp__main { 
-      font-size: 10rem; 
+      font-size: 8rem; 
     }
     .user-temp__detail {
       display: flex;
       flex-direction: column;
-      padding: 0 3rem;
-      font-size: 25px;
-      margin-top: 40px;
+      margin-left: 1rem;
+      margin-top: 24px;
+
+      .user-temp__desc {
+        font-size: 30px;
+        color: #675f5f;        
+      }
 
       .user-temp__desc2 {
         font-size: 16px;
         color: #969696;        
       }
       .user-temp__desc3 {
-        display: flex;
-        p {
-          font-size: 14px;
-          color: #838383;
-        }
-
-        span {
-          font-size: 30px;
-        }
-
-        sup {
-          font-size: 13px;          
-        }
-
-        .user-temp__high {
-          margin-right: 1rem;
-        }
+        display: none;
       }
     }
   }
@@ -97,10 +94,10 @@ sup {
 form {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 70%;
 
   #input {
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: 'Playfair Display', serif;
     text-align: center;
     color: white;
@@ -125,7 +122,7 @@ form {
 
 .user-temp {
   margin: 5rem 0;
-  display: flex;
+  display: block;
   justify-content: space-between;
 
   .btn-save {
@@ -136,6 +133,11 @@ form {
 
   .user-temp__body, .user-temp__side {
     flex: 1;
+
+    .user-temp__location {
+      font-size: 30px;
+      font-weight: normal
+    }
 
     .user-temp__location,
     .user-temp__date {
@@ -153,21 +155,25 @@ form {
       display: flex;
       justify-content: space-around;      
       text-align: center;
+      margin: 4rem 0 2rem 0;
+
+      .forecast-date {
+        color: #4d4848;
+        font-size: 14px;
+      }
     }
   }
 
   .user-temp__body{
-    border-right: 1px solid #85919f40;
-    margin-right: 5rem; 
 
     .user-temp__inner {
+      // height: auto;
       display: flex;
+      // top: initial;
+      // justify-content: initial;
+      // width: auto;
       align-items: center;    
-      height: 100%;
-      position: absolute;
-      top: 0;
       justify-content: center;
-      width: 44%;
     }
   }
 }
@@ -179,8 +185,8 @@ form {
 }
 
 .wi {
-  font-size: 4rem;
-  color: #97a6b6;
+  font-size: 2rem;
+  color: #51657b;
 }
 
 .slick-track {
@@ -220,4 +226,102 @@ form {
   text-align: center;
   font-size: 40px;
   padding-top: 10rem;  
+}
+
+.slick-slider {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 1200px) {
+  
+  form {
+    width: 40%;
+
+    #input {
+      font-size: 3rem;
+    }
+  }
+
+  .wi {
+    font-size: 4rem;
+  }
+
+  sup {
+    font-size: 30px;
+  }
+
+  .body{
+    .user-temp {
+      display: flex;
+      padding: 2rem;
+
+      .user-temp__main { 
+        font-size: 10rem; 
+        color: #4d4848;
+      }    
+
+
+
+
+
+      .user-temp__detail {
+        // padding: 0 3rem;
+
+
+        .user-temp__desc {
+          font-size: 40px;
+        }
+
+        .user-temp__desc2 {
+          font-size: 16px;
+        }
+        .user-temp__desc3 {
+          display: flex;
+          p {
+            font-size: 14px;
+            color: #838383;
+          }
+
+          span {
+            font-size: 20px;
+          }
+
+          sup {
+            font-size: 13px;          
+          }
+
+
+
+
+
+          .user-temp__high {
+            margin-right: 0;
+          }
+        }
+
+        .user-temp__high {
+          margin-right: 1rem;
+        }      
+      }
+
+      .user-temp__body{
+        border-right: 1px solid #85919f40;
+        // margin-right: 5rem; 
+
+        .user-temp__inner {
+          display: flex;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          justify-content: center;
+          width: 44%;
+        }      
+      }    
+
+      .user-temp__side {
+        padding-left: 2rem;
+      }
+    }
+  }
 }
