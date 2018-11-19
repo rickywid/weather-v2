@@ -162,7 +162,12 @@ form {
 
     .user-temp__inner {
       display: flex;
-      align-items: center;      
+      align-items: center;    
+      height: 100%;
+      position: absolute;
+      top: 0;
+      justify-content: center;
+      width: 44%;
     }
   }
 }
