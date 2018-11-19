@@ -1,8 +1,6 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display');
-// @import url('src/assets/styles/weather-icons-wind.min.scss');
-// @import url('src/assets/styles/weather-icons.min.scss');
 
 body {
   font-family: 'Playfair Display', serif;
@@ -23,14 +21,26 @@ p {
 
 nav{
   padding: 3rem 0;
-  background: #0019377a;
+  background: #c7c7c7;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0px 9px 5px -5px rgba(0,0,0,0.3);
 
   h1,h3 {
     color: white;
+  }
+
+  .nav-header {
+    text-align: center;
+    padding: 0 1rem;
+    color: #141414;
+
+    .quote-auth {
+      font-size: 14px;
+      margin-top: 1rem;
+    }
   }
 }
 
@@ -234,7 +244,20 @@ form {
 }
 
 @media only screen and (min-width: 1200px) {
-  
+
+  nav{
+    .nav-header {
+      p {
+        font-size: 2rem;
+      }
+      .quote-auth {
+        font-size: 20px;
+        margin-top: 1rem;
+        float: right;
+      }
+    }
+  }
+
   form {
     width: 40%;
 

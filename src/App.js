@@ -49,10 +49,15 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            savedCities: JSON.parse(localStorage.getItem("savedCities"))
-        })
 
+        // if there are no saved cities by default, then preload some cities
+        if(localStorage.getItem("savedCities") === null){
+            localStorage.setItem("savedCities", JSON.stringify(["london", "new york", "paris", "tokyo", "toronto", "sydney", "moscow", "rome", "berlin"]));
+        } else {
+            this.setState({
+                savedCities: JSON.parse(localStorage.getItem("savedCities"))
+            })
+        }
 
         navigator.geolocation.getCurrentPosition(function(position) {
             new APIRequest().reverseLookup().then(res => {

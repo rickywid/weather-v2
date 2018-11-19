@@ -2,14 +2,22 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import APIRequest from '../services/request';
+import QuoteGen from '../services/quoteGen';
 
 export default class NavBar extends React.Component {
 	
 	constructor(props){
 		super(props);
 
-		this.state = { search: ''};
+		this.state = { 
+            search: '',
+            quote: {}
+        };
 	}
+
+    componentDidMount() {
+        new QuoteGen().then(quote => this.setState({ quote: quote[0] }))
+    }
 
     handleChange = (e) => {
         this.setState({ search: e.target.value });
@@ -26,7 +34,7 @@ export default class NavBar extends React.Component {
 	render() {
 		return (
 			<nav>
-				<h1>WeatheReactor</h1>
+				<div className="nav-header" dangerouslySetInnerHTML={{__html: `${this.state.quote.content} <p class="quote-auth">- <i>${this.state.quote.title}</i></p>`}}/>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <TextField
                         id="input"
