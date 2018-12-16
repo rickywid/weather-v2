@@ -15,8 +15,9 @@ class APIRequest {
 		  });
 	}
 
-	reverseLookup() {
-		return fetch("https://api.opencagedata.com/geocode/v1/json?q=43.6772864+-79.2788992&key=1cf4f4a9be7544b78ad327e028757a33").then(function(response){
+	reverseLookup(lat, lon) {
+
+		return fetch(`https://us1.locationiq.com/v1/reverse.php?key=bb928de54beccd&lat=${lat}&lon=${lon}&format=json`).then(function(response){
 			return response.json();
 		}).then(function(myJson){
 			return myJson;
@@ -24,6 +25,7 @@ class APIRequest {
 	}
 
 	request(location) {
+		console.log(location)
 		return Promise.all([this.getDailyWeather(location, 'weather'), this.getDailyWeather(location, 'forecast')]);
 	}
 

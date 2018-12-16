@@ -60,12 +60,19 @@ class App extends Component {
         })             
 
         navigator.geolocation.getCurrentPosition(function(position) {
-            new APIRequest().reverseLookup().then(res => {
+
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            
+            new APIRequest().reverseLookup(lat, lon).then(res => {
+
+                const country = res.address.country;
+                const city =  res.address.city || res.address.town;
 
                 let copyState = this.state.user;
                 copyState = {
-                    city: res.results[0].components.city,
-                    country: res.results[0].components.country                  
+                    city: city,
+                    country: country                  
                 }
 
                 this.setState({ user: copyState }, ()=> {
