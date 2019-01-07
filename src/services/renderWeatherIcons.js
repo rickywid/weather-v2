@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const renderWeatherIcons = (data)=>{
+export const renderWeatherIcons = data =>{
 		return data.map((weather, index) => {
 			const date = weather.date ? weather.date.split(",")[0] : '';
 	

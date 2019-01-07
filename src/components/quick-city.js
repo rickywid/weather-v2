@@ -16,10 +16,7 @@ export default class QuickCity extends React.Component {
 		})
 	}
 
-	render() {
-
-		const { location } = this.props;
-		
+	render() {		
 		return (
 				<div className="quick-city-body" onClick={this.handleClick}>
 					<p className="quick-city__name">{this.props.name}, {this.props.country}</p>

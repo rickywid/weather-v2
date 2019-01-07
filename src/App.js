@@ -4,8 +4,6 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import APIRequest from './services/request';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import NavBar from './components/navbar';
 import Home from './components/home';
 import Weather from './components/weather';
@@ -48,7 +46,17 @@ class App extends Component {
         }
     }
 
+    error() {
+        console.log('called')
+    }
+
     componentDidMount() {
+
+        let lat;
+        let lon;
+        let country;
+        let city;
+        let copyState;
 
         // if there are no saved cities by default, then preload some cities
         if(localStorage.getItem("savedCities") === null){
@@ -60,16 +68,15 @@ class App extends Component {
         })             
 
         navigator.geolocation.getCurrentPosition(function(position) {
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
 
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            
             new APIRequest().reverseLookup(lat, lon).then(res => {
 
-                const country = res.address.country;
-                const city =  res.address.city || res.address.town;
+                country = res.address.country;
+                city =  res.address.city || res.address.town;
 
-                let copyState = this.state.user;
+                copyState = this.state.user;
                 copyState = {
                     city: city,
                     country: country                  
@@ -81,7 +88,32 @@ class App extends Component {
                     });                 
                 });
             });
+        }, function(error) {
+
+            lat = 43.653226;
+            lon = -79.3831843;
+
+            new APIRequest().reverseLookup(lat, lon).then(res => {
+
+
+                country = res.address.country;
+                city =  res.address.city || res.address.town;
+
+                copyState = this.state.user;
+                copyState = {
+                    city: city,
+                    country: country                  
+                }
+
+                this.setState({ user: copyState }, ()=> {
+                    new APIRequest().request(`${this.state.user.city}, ${this.state.user.country}`).then(res=>{
+                        this.updateLocation(res);
+                    });                 
+                });
+            });
+
         }.bind(this));  
+
 
         this.quickWeather();
         
