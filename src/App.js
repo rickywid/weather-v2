@@ -67,7 +67,7 @@ class App extends Component {
             savedCities: JSON.parse(localStorage.getItem("savedCities"))
         })             
 
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(position => {
             lat = position.coords.latitude;
             lon = position.coords.longitude;
 
@@ -87,7 +87,7 @@ class App extends Component {
                         this.updateLocation(res);
                     });                 
                 });
-            });
+            }, err => console.log(err));
         }, function(error) {
 
             lat = 43.653226;

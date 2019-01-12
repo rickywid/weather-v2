@@ -3,21 +3,8 @@ import moment from 'moment';
 
 export default class Weather extends React.Component {
 	
-	componentDidMount(){
-		console.log(this.props)
-	}
-
 	updateCity(action){
 		this.props.saveCity(this.props.city.toLowerCase(), action);
-	}
-
-	isSavedCityBtn() {
-		
-		// let isFound = this.props.saveCityState.find(city => city === this.props.city.toLowerCase());
-
-		// return isFound ? 	<button onClick={this.updateCity.bind(this, 'REMOVE')}>remove city</button> : 
-		// 					<button onClick={this.updateCity.bind(this, 'ADD')}>save city</button>;
-
 	}
 
 	render() {
