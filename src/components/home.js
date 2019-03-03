@@ -156,7 +156,7 @@ export default class Home extends React.Component {
 				</div>
 
 				<GoogleMap coord={this.props.location.coord} />
-			
+		
 			</div>
 		)
 	}
