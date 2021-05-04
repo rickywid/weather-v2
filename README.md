@@ -2,7 +2,7 @@
 
 Just another weather application to check the weather for all your favourite cities.
 
-[LIVE SITE](https://rickywid.github.io/weather-v2)
+:rocket:[LIVE SITE](https://rickywid.github.io/weather-v2)
 
 ### Tech Stack
 - React
