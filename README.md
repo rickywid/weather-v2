@@ -1,6 +1,7 @@
-## Weather App
+## Forecast Finder
+![screenshot](https://i.imgur.com/aVtqLw1.png)
 
-Just another weather application to check the weather for all your favourite cities.
+An application to search weather information for a given city. Users have the ability to search and save cities to their favourites list, view the five day forecase along with a weather description, toggle between Celcius and Farenheit temperatures and displaying the city's location on Google Maps.
 
 :rocket: [LIVE SITE](https://rickywid.github.io/weather-v2)
 
