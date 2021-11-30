@@ -8,6 +8,7 @@ Just another weather application to check the weather for all your favourite cit
 - React
 - OpenWeatherMap API
 - Google Maps API
+- Material UI
 
 ### Features and Functionality
 - Search cities
